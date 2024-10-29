@@ -11,7 +11,7 @@ export const Button = ({ label, parentMethod }: Props) => {
     <button className="custom-button" onClick={parentMethod}>
       {label}
     </button>
-    // Cada vez que hagas click crea un nuevo metodo y ejecutalo $[NO RECOMENDADO]
+    // Cada vez que hagas click crea un nuevo metodo y ejecutalo [NO RECOMENDADO]
     // <button className="custom-button" onClick={() => parentMethod()}>
     //   {label}
     // </button>

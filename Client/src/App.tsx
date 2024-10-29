@@ -3,15 +3,39 @@ import "./App.css";
 import { Button } from "./Components/";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [Count, setCount] = useState(0);
+  const [Name, setName] = useState("Diego");
 
-  const countMore = () => {
-    setCount(count + 1);
+  // batching
+  // const IncreaseLocalCount = () => {
+  //   setCount(Count + 1); // 0 + 1
+  //   setCount(Count + 1); // 0 + 1
+  //   setCount(Count + 1); // 0 + 1
+  //   setCount(Count + 1); // 0 + 1
+  //   setCount(Count + 1); // 0 + 1
+  // };
+
+  const IncreaseLocalCount = () => {
+    setCount((Count) => Count + 1); // (0) => 0 + 1
+    setCount((Count) => Count + 1); // (1) => 1 + 1
+    setCount((Count) => Count + 1); // (2) => 2 + 1
+    setCount((Count) => Count + 1); // (3) => 3 + 1
+    setCount((Count) => Count + 1); // (4) => 4 + 1
+  };
+
+  const changeName = () => {
+    if (Name === "Juan") {
+      setName("Diego");
+      return;
+    }
+    setName("Juan");
   };
 
   return (
     <>
-      <Button label={`Count is ${count}`} parentMethod={countMore} />
+      <Button label={`Count is ${Count}`} parentMethod={IncreaseLocalCount} />
+      <p>{Name}</p>
+      <Button label={"Change Name"} parentMethod={changeName} />
     </>
   );
 }
