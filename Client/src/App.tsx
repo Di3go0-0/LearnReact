@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 
 //Unidad logica
@@ -13,12 +13,15 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const consoleLoader = (loagingValue: boolean) => {
-    setLoading(loagingValue);
-    console.log("Loading: ", loading);
-  };
+  const consoleLoader = useCallback(
+    (loagingValue: boolean) => {
+      setLoading(loagingValue);
+      console.log("Loading: ", loading);
+    },
+    [loading],
+  );
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     consoleLoader(true);
     try {
       const response = await fetch("https://api.example.com/data");
@@ -32,14 +35,14 @@ function App() {
     } finally {
       consoleLoader(false);
     }
-  };
+  }, [consoleLoader]);
 
   //  Normalmente pondriamos en arreglo de dependencias {data}, aunque implicitamente se maneja
   //  el data con el fetchData, no es necesario pornerlo en el arreglo de dependecias del useEffect
   //  porque no lo usa directamente, y si lo ponemos este crearia un bucle.
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   if (loading) {
     return <div>Loading...</div>;
