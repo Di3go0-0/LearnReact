@@ -1,19 +1,24 @@
+import { ReactNode } from "react";
 import "./Button.css";
 
 interface Props {
-  label: string;
+  children: ReactNode; // Proyeccion de contenido en el Button
+  // Proyeccion de contenido es cuando un componente recibe un componente hijo y lo renderiza
   parentMethod: () => void;
 }
 
-export const Button = ({ label, parentMethod }: Props) => {
+interface ChildrenProps {
+  children: JSX.Element; // Elmento JSX que se renderizara en el ChildrenButton
+}
+
+export const ColorRed = ({ children }: ChildrenProps) => {
+  return <div className="color-red">{children} </div>; // Si el children es un componente, seria un ReactNode
+};
+
+export const Button = ({ children, parentMethod }: Props) => {
   return (
-    // Cuando haya un metodo usalo
     <button className="custom-button" onClick={parentMethod}>
-      {label}
+      {children}
     </button>
-    // Cada vez que hagas click crea un nuevo metodo y ejecutalo [NO RECOMENDADO]
-    // <button className="custom-button" onClick={() => parentMethod()}>
-    //   {label}
-    // </button>
   );
 };
