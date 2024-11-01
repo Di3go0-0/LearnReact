@@ -1,14 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 
+//Unidad logica
+// 1- States example: {const[data, setData] = useState([])}
+//
+// 2- Methods : const fetchData = () => {}
+//
+// 3- Effect
+
 function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Al pasarle el consoleLoader como dependencia al fechtData
-  // necesitamos usar un CallBack para evitar que se ejecute en cada render
-  // y solo cuando se necesite (en este caso cuando cambie el loading)
   const consoleLoader = useCallback(
     (loagingValue: boolean) => {
       setLoading(loagingValue);
@@ -17,10 +21,6 @@ function App() {
     [loading],
   );
 
-  // Al pasasrle el fetchData como dependencia al UseEffect,
-  // el fetchData necesita activarse solo cuando haya un cambio (en este caso el console loader)
-  // por lo que al usar un CallBack, se evita que se ejecute en cada renderizado, solo cuando se necesite
-  // y necesitamos pasarle el consoleLoader como dependencia
   const fetchData = useCallback(async () => {
     consoleLoader(true);
     try {
@@ -37,8 +37,9 @@ function App() {
     }
   }, [consoleLoader]);
 
-  // El useEffect al detectar que el fetchData tiene dependencias,
-  // Necesita pasar el fechtData como dependencia para que se ejecute
+  //  Normalmente pondriamos en arreglo de dependencias {data}, aunque implicitamente se maneja
+  //  el data con el fetchData, no es necesario pornerlo en el arreglo de dependecias del useEffect
+  //  porque no lo usa directamente, y si lo ponemos este crearia un bucle.
   useEffect(() => {
     fetchData();
   }, [fetchData]);
@@ -51,5 +52,28 @@ function App() {
   }
   return <div>{JSON.stringify(data)}</div>;
 }
-
 export default App;
+
+// Decl
+////Mal uso Del UseEffect
+//  //Maneja el estado de la aplicacion
+//  useEffect(
+//    () => {
+//      //Logica
+//      // 1- cuando se monta el componente
+//      // 2- cada vez que se modificque uno de los valores del segundo parametro
+//      //
+//      return () => {
+//        // Manejar el estado de la memoria
+//      };
+//    },
+//    [
+//      /* {`Arreglo de dependencias`} state */
+//    ],
+//  );
+//  //Correcto us el useEffect
+//  // Comunicamos con un API
+//  // sincronizar con entidades externas
+//  // operacioes asynconas
+//  // parametros de entrada
+//
