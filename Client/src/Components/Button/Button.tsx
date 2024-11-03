@@ -8,7 +8,7 @@ interface Props {
 }
 
 interface ChildrenProps {
-  children: JSX.Element; // Elmento JSX que se renderizara en el ChildrenButton
+  children: ReactNode; // Proyeccion de contenido en el ColorRed
 }
 
 export const ColorRed = ({ children }: ChildrenProps) => {
