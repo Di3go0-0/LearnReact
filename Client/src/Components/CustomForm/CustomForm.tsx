@@ -2,7 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputForm from "../CustomInput/CustomInput";
 import "./CustomForm.css";
-import { FormValues, schema } from "../../Models/Form.model";
+import { FormValues, schema } from "../../Models";
 
 const CustomForm = () => {
   const {
@@ -11,6 +11,13 @@ const CustomForm = () => {
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
+    mode: "onBlur", // El mode onBlur valida los campos cuando el usuario sale del input
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
