@@ -9,6 +9,10 @@ function App() {
   const handleClinck = () => {
     console.log("uy me clickio todo");
   };
+
+  const sayHey = () => {
+    alert("Hey!!!");
+  };
   // Proyeccion de contenido en el Button,
   // Simplemente le pasamos parentMethod y el children
   // que Simplemente seria pasarle un componente hijo para que lo renderize
@@ -17,6 +21,10 @@ function App() {
       {/* <Button parentMethod={handleClinck}> */}
       {/*   {/* <div>My Label</div> se podria hacer de esta manera, pero Vamos a usar al Children Button*/}
       {/* </Button> */}
+
+      <ColorRed>
+        <Button parentMethod={sayHey}>Say hey!!!</Button>
+      </ColorRed>
 
       {/* La Logica del botton la tiene el botn, no el padre */}
       {/* La logica de lo que pasa cuando toco el boton es del padre */}
