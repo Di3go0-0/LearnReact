@@ -5,3 +5,4 @@ export * from "./CustomInput/CustomInput.tsx";
 export * from "./UseRef/";
 export * from "./UseMemo/UseMemo.tsx";
 export * from "./UseCallBack/UseCallback.tsx";
+export * from "./Modal/Modal.tsx";
