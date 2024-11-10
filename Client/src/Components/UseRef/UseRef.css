@@ -1,0 +1,13 @@
+.BookReader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* button { */
+/*   margin: 4px; */
+/*   width: 100px; */
+/*   height: 30px; */
+/*   background-color: #f0f0f0; */
+/* } */
